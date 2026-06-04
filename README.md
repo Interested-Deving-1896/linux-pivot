@@ -1,31 +1,29 @@
+[update-readmes]   Mode: rewrite — migrating to template structure...
 # linux-pivot
 
-Distro-agnostic, arch-agnostic Linux system converter. Converts a running
-system (or a rootfs directory) from one distro to another, preserving users,
-home directories, hostname, fstab, network config, and services. Optionally
-converts the kernel via [lkf](https://github.com/lkf-project/lkf).
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/linux-pivot)
 
-## Supported distros
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-| Distro | Extract | Install |
-|--------|---------|---------|
-| Debian | ✓ | ✓ |
-| Ubuntu | ✓ | ✓ |
-| Devuan | ✓ | ✓ |
-| Arch Linux | ✓ | ✓ |
-| Fedora | ✓ | ✓ |
-| Alpine | ✓ | ✓ |
-| Void | ✓ | ✓ |
-| openSUSE | ✓ | ✓ |
-| Gentoo | ✓ | ✓ |
+## Architecture
 
-## Supported architectures
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-`amd64` `arm64` `armhf` `riscv64` `ppc64el` `s390x` `loong64` `i386`
+## Install
 
-Cross-arch conversions use `qemu-user-static` + `binfmt_misc` automatically.
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
+
+```bash
+git clone https://github.com/Interested-Deving-1896/linux-pivot.git
+cd linux-pivot
+```
 
 ## Usage
+
 
 ```bash
 # Convert running system to Debian
@@ -47,62 +45,50 @@ sudo ./pivot.sh --from /tmp/my-system.toml --to fedora
 sudo ./pivot.sh --to ubuntu --dry-run
 ```
 
-## How it works
+## Configuration
 
-1. **Extract** — a per-distro extractor script reads the source system and
-   writes a `system.manifest.toml` capturing: hostname, arch, timezone, locale,
-   users, groups, installed packages, enabled services, fstab, and network
-   config.
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-2. **Translate** — `lib/pkgmap.sh` maps package names across distros using
-   `config/package-map.toml`.
+## CI
 
-3. **Install** — a per-distro installer script bootstraps the target rootfs
-   (debootstrap / pacstrap / dnf --installroot / etc.), then applies the
-   manifest: creates users, restores home directories, enables services,
-   writes fstab and network config.
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-4. **Kernel** (optional) — `kernel/convert.sh` uses lkf to repackage the
-   running kernel for the target distro's package format.
+## Mirror chain
 
-## Directory layout
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/linux-pivot`](https://github.com/Interested-Deving-1896/linux-pivot) and mirrored through:
 
 ```
-pivot.sh                  # main entry point
-lib/
-  log.sh                  # logging helpers
-  arch.sh                 # arch detection + QEMU setup
-  manifest.sh             # TOML manifest read/write
-  pkgmap.sh               # cross-distro package name translation
-  chroot.sh               # chroot helpers
-config/
-  manifest.schema.toml    # manifest field definitions
-  package-map.toml        # canonical → per-distro package name table
-extractors/               # per-distro: read system state → manifest
-installers/               # per-distro: apply manifest → target rootfs
-kernel/
-  detect.sh               # kernel version/config detection
-  convert.sh              # lkf integration
-.github/workflows/
-  ci.yml                  # shellcheck + extract + pkgmap + dry-run matrix
+Interested-Deving-1896/linux-pivot  ──►  OpenOS-Project-OSP/linux-pivot  ──►  OpenOS-Project-Ecosystem-OOC/linux-pivot
 ```
 
-## Requirements
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-- Root / sudo
-- `bash` 4.4+
-- `python3` (for manifest and pkgmap helpers)
-- Distro bootstrap tool for the target (installed automatically if missing):
-  `debootstrap`, `pacstrap`, `dnf`, `apk`, `xbps-install`, `zypper`, `emerge`
-- For cross-arch: `qemu-user-static`, `binfmt-support`
+## Contributors
 
-## penguins-pivot
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
 
-[penguins-pivot](https://github.com/Interested-Deving-1896/penguins-pivot) is
-a fork of this project wired into the
-[penguins-eggs](https://github.com/pieroproietti/penguins-eggs) all-features
-ecosystem, enabling live-ISO-based distro conversion.
+## Origins
+
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
+
+## Resources
+
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
 ## License
 
-MIT
+<!-- AI:start:license -->
+<!-- License not detected — add a LICENSE file to this repo. -->
+<!-- AI:end:license -->
