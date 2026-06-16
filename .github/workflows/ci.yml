@@ -12,7 +12,7 @@ jobs:
     name: shellcheck
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: sudo apt-get install -y shellcheck
       - name: Lint all shell scripts
         run: |
@@ -24,7 +24,7 @@ jobs:
     name: mock / extract (ubuntu)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Extract manifest from runner
         run: sudo bash extractors/debian.sh /tmp/test.manifest.toml /
       - name: Validate manifest fields
@@ -43,7 +43,7 @@ jobs:
     name: mock / package map
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Test package name translations
         run: |
           source lib/pkgmap.sh
@@ -71,7 +71,7 @@ jobs:
       matrix:
         target: [debian, ubuntu, devuan, arch, fedora, alpine, void, opensuse, gentoo]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Extract manifest
         run: sudo bash extractors/debian.sh /tmp/test.manifest.toml /
       - name: Dry-run pivot
@@ -89,7 +89,7 @@ jobs:
       matrix:
         target: [debian, ubuntu, devuan, arch, fedora, alpine, void, opensuse, gentoo]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Extract manifest
         run: sudo bash extractors/debian.sh /tmp/test.manifest.toml /
       - name: Mock-bootstrap pivot
@@ -130,7 +130,7 @@ jobs:
       image: ${{ matrix.image }}
       options: --privileged
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install bootstrap tooling
         run: |
